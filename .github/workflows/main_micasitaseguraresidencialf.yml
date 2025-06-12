@@ -23,10 +23,17 @@ jobs:
 
       - name: Instalar dependencias con reintentos
         run: |
-          for i in 1 2 3; do
-            echo "Intento $i de instalación de dependencias..."
-            npm install --registry=https://registry.npmjs.org/ && break || sleep 15
-          done
+          $maxRetries = 3
+          for ($i = 1; $i -le $maxRetries; $i++) {
+            Write-Host "Intento $i de instalación de dependencias..."
+            try {
+              npm install --registry=https://registry.npmjs.org/
+              if ($LASTEXITCODE -eq 0) { break }
+            } catch {
+              Write-Host "Error en intento $i"
+            }
+            Start-Sleep -Seconds 15
+          }
 
       - name: Build Angular app (producción)
         run: npx ng build --configuration production
