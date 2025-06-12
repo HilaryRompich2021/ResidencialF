@@ -13,15 +13,20 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '22'
 
-      - name: Install dependencies
-        run: npm install --registry=https://registry.npmjs.org/
+      - name: Instalar dependencias con reintentos
+        run: |
+          for i in 1 2 3; do
+            echo "Intento $i de instalación de dependencias..."
+            npm install --registry=https://registry.npmjs.org/ && break || sleep 15
+          done
 
       - name: Build Angular app (producción)
         run: npx ng build --configuration production
@@ -30,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: angular-app
-          path: dist/browser
+          path: dist/mi-casita-tailwind/browser
 
   deploy:
     runs-on: ubuntu-latest
