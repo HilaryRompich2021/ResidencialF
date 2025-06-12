@@ -29,11 +29,11 @@ jobs:
           npm run build --if-present
           echo "Skipping ng test in CI"
       
-      - name: Upload Angular production build
+      - name: Upload Angular build (SSR)
         uses: actions/upload-artifact@v4
         with:
           name: angular-app
-          path: dist/mi-casita-tailwind
+          path: dist/browser
 
   deploy:
     runs-on: ubuntu-latest
@@ -64,5 +64,5 @@ jobs:
         with:
           app-name: 'MiCasitaSeguraResidencialF'
           slot-name: 'Production'
-          package: .
+          package: ./angular-app
           
