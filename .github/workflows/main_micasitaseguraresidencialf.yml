@@ -24,7 +24,7 @@ jobs:
         run: npm install
 
       - name: Build Angular app (producción)
-        run: npm run build -- --configuration production
+        run: npx ng build --configuration production
 
       - name: Upload Angular build output
         uses: actions/upload-artifact@v4
