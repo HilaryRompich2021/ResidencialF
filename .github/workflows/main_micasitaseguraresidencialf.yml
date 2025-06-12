@@ -27,7 +27,7 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          run: echo "Skipping ng test in CI"
+          echo "Skipping ng test in CI"
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
