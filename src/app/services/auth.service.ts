@@ -16,10 +16,12 @@ export class AuthService {
   ///[x: string]: any;
   //private baseUrl = 'http://localhost:8080/api/auth';
   private baseUrl = `${environment.apiUrl}/auth`;
+
   private tokenKey = 'auth_token';
 
   constructor(private http: HttpClient){
     this.limpiarTokenExpirado();
+
   }
 
   /** POST /api/auth/login */
@@ -30,6 +32,8 @@ export class AuthService {
       credentials,
       { headers }
     );
+    console.log('🔧 API URL en este host:', environment.apiUrl);
+
   }
 
   setToken(token: string) {
