@@ -45,6 +45,20 @@ export const routes: Routes = [
 
   },
 
+  
+  {
+    path: 'enqr-scanner',
+    canActivate: [AdminGuard],
+    loadComponent: () => import('./qr-scanner/qr-scanner.component').then(m => m.default)
+  },
+
+  {
+    path: 'salqr-scanner',
+    canActivate: [AdminGuard],
+    loadComponent: () => import('./qr-scanner/qr-scannersal/qr-scannersal.component').then(m => m.default)
+  },
+
+
   /**Rutas Residente*/
   {
     path: 'visitanteresidente',
@@ -105,18 +119,6 @@ export const routes: Routes = [
     path: 'paquete/validar',
     loadComponent: () => import('./Correspondencia/validate-paquete/validate-paquete.component').then(m => m.default)
   },
-
-  {
-    path: 'enqr-scanner',
-    loadComponent: () => import('./qr-scanner/qr-scanner.component').then(m => m.default)
-  },
-
-  {
-    path: 'salqr-scanner',
-    loadComponent: () => import('./qr-scanner/qr-scannersal/qr-scannersal.component').then(m => m.default)
-  },
-
-
 
   {
     path: '**',

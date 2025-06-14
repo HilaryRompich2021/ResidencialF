@@ -289,6 +289,58 @@
     </div>
   </a>
 
+  <!-- Botón Entrada -->
+<a
+  routerLink="/enqr-scanner"
+  routerLinkActive="bg-white/10 text-white"
+  [routerLinkActiveOptions]="{ exact: true }"
+  class="w-full flex items-center gap-x-1.5 group select-none"
+>
+  <div class="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-green-600 transition-all duration-300"></div>
+  </div>
+  <div class="group-hover:bg-white/10 w-full group-active:scale-95 self-stretch pl-2 rounded flex items-center space-x-2 transition-all duration-200 text-sm">
+    <!-- Ícono flecha derecha -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-gray-400 group-hover:text-green-500 transition-colors duration-200"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-4-4l4 4-4 4" />
+    </svg>
+    <span class="hidden md:inline font-QuicksandMedium">Entrada</span>
+  </div>
+</a>
+
+<!-- Botón Salida -->
+<a
+  routerLink="/salqr-scanner"
+  routerLinkActive="bg-white/10 text-white"
+  [routerLinkActiveOptions]="{ exact: true }"
+  class="w-full flex items-center gap-x-1.5 group select-none mt-2"
+>
+  <div class="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-red-600 transition-all duration-300"></div>
+  </div>
+  <div class="group-hover:bg-white/10 w-full group-active:scale-95 self-stretch pl-2 rounded flex items-center space-x-2 transition-all duration-200 text-sm">
+    <!-- Ícono flecha izquierda -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-gray-400 group-hover:text-red-600 transition-colors duration-200"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m4-4l-4 4 4 4" />
+    </svg>
+    <span class="hidden md:inline font-QuicksandMedium">Salida</span>
+  </div>
+</a>
+
   <!-- profile group -->
   <div class="w-full pr-3 flex flex-col gap-y-1 text-gray-500 fill-gray-500 text-sm">
     <div class="font-QuicksandMedium pl-4 text-gray-400/60 text-xs text-[11px] uppercase">Perfil</div>
