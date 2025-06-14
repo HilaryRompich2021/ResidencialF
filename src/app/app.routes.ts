@@ -107,9 +107,15 @@ export const routes: Routes = [
   },
 
   {
-    path: 'qr-scanner',
+    path: 'enqr-scanner',
     loadComponent: () => import('./qr-scanner/qr-scanner.component').then(m => m.default)
   },
+
+  {
+    path: 'salqr-scanner',
+    loadComponent: () => import('./qr-scanner/qr-scannersal/qr-scannersal.component').then(m => m.default)
+  },
+
 
 
   {
