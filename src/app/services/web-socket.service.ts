@@ -1,36 +1,29 @@
+// web-socket.service.ts
 import { Injectable } from '@angular/core';
-import { webSocket, WebSocketSubjectConfig, WebSocketSubject } from 'rxjs/webSocket';
-import { Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class WebSocketService {
-  private socket$: WebSocketSubject<string>;
+  private socket!: WebSocket;
+  private messages$ = new Subject<string>();
 
-  constructor() {
-    const config: WebSocketSubjectConfig<string> = {
-      url: 'ws://localhost:8080/ws/talanquera',
-            deserializer: ({ data }) => data as string,
-      serializer: msg => msg,
-      // opcional: observar apertura/cierre
-      openObserver: {
-        next: () => console.log('[WS] conectado'),
-      },
-      closeObserver: {
-        next: () => console.log('[WS] desconectado'),
-      }
-    };
-    this.socket$ = webSocket<string>(config);
-  }
-
-  send(message: string): void {
-    this.socket$.next(message);
+  connect(): void {
+    const url = `${environment.wsUrl}/talanquera`;
+    this.socket = new WebSocket(url);
+    this.socket.onopen    = () => console.log('[WS] conectado a', url);
+    this.socket.onmessage = msg => this.messages$.next(msg.data);
+    this.socket.onerror   = err => console.error('[WS] error', err);
+    this.socket.onclose   = () => console.log('[WS] desconectado');
   }
 
   onMessage(): Observable<string> {
-    return this.socket$.asObservable();
+    return this.messages$.asObservable();
   }
 
-  close(): void {
-    this.socket$.complete();
+  broadcast(msg: string) {
+    if (this.socket?.readyState === WebSocket.OPEN) {
+      this.socket.send(msg);
+    }
   }
 }
